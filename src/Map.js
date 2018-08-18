@@ -1,12 +1,30 @@
 import React from 'react';
 
 class Map extends React.Component {
+  constructor(props) {
+    super(props);
+
+    window.mapComponent = this;
+
+    this.state = {
+      ready: false
+    }
+  }
+  onReady() {
+    this.setState((prevState, props) => {
+      return { ready: true }
+    });
+  }
   componentDidMount() {
     loadGoogleMaps();
   }
   render() {
+    const markers = this.state.ready ? this.props.children : null;
+
     return (
-      <div id="map" />
+      <div id="map">
+      { markers }
+      </div>
     );
   }
 }
@@ -26,6 +44,9 @@ window.initGoogleMaps = function () {
     center: { lat: 51.5080883, lng: -0.1291377 },
     zoom: 14
   });
+
+  // Tell the React component it is ready.
+  window.mapComponent.onReady();
 }
 
 export default Map;
