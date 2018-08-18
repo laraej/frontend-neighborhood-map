@@ -13,7 +13,10 @@ class Map extends React.Component {
   onInit() {
     window.map = new window.google.maps.Map(document.getElementById("map"), {
       center: this.props.center,
-      zoom: this.props.zoom
+      zoom: this.props.zoom,
+      mapTypeControl: false,
+      fullscreenControl: false,
+      streetViewControl: false
     });
 
     this.setState((prevState, props) => {
