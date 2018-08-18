@@ -5,7 +5,7 @@ class Marker extends React.Component {
     super(props);
 
     this.marker = new window.google.maps.Marker({
-      position: { lat: this.props.lat, lng: this.props.lng },
+      position: this.props.position,
       title: this.props.title
     });
   }
