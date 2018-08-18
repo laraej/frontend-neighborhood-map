@@ -7,19 +7,24 @@ class Map extends React.Component {
     window.mapComponent = this;
 
     this.state = {
-      ready: false
+      initialized: false
     }
   }
-  onReady() {
+  onInit() {
+    window.map = new window.google.maps.Map(document.getElementById("map"), {
+      center: this.props.center,
+      zoom: this.props.zoom
+    });
+
     this.setState((prevState, props) => {
-      return { ready: true }
+      return { initialized: true }
     });
   }
   componentDidMount() {
     loadGoogleMaps();
   }
   render() {
-    const markers = this.state.ready ? this.props.children : null;
+    const markers = this.state.initialized ? this.props.children : null;
 
     return (
       <div id="map">
@@ -40,13 +45,7 @@ function loadGoogleMaps() {
 }
 
 window.initGoogleMaps = function () {
-  window.map = new window.google.maps.Map(document.getElementById("map"), {
-    center: { lat: 51.5080883, lng: -0.1291377 },
-    zoom: 14
-  });
-
-  // Tell the React component it is ready.
-  window.mapComponent.onReady();
+  window.mapComponent.onInit();
 }
 
 export default Map;

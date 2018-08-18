@@ -6,7 +6,7 @@ import './App.css';
 class App extends React.Component {
   render() {
     return (
-      <Map>
+      <Map center={{ lat: 51.5080883, lng: -0.1291377 }} zoom={ 14 }>
         <Marker title="The National Gallery" position={{ lat: 51.508929, lng: -0.128299 }} />
         <Marker title="Tate Modern" position={{ lat: 51.5075939, lng: -0.0993544 }} />
         <Marker title="British Museum" position={{ lat: 51.5194133, lng: -0.1269566 }} />
