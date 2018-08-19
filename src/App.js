@@ -35,8 +35,6 @@ class App extends React.Component {
     else {
       const markers = this.markers.filter((marker) => marker.title.toLowerCase().indexOf(text.toLowerCase()) >= 0);
 
-      console.log(markers);
-
       this.setState((prevState, props) => {
         return {markers: markers}
       });
