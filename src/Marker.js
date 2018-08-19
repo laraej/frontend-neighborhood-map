@@ -25,6 +25,10 @@ class Marker extends React.Component {
     // Make the marker visible.
     this.marker.setMap(window.map);
   }
+  componentWillUnmount() {
+    // Make the marker invisible.
+    this.marker.setMap(null);
+  }
   render() {
     // If this marker's info window should be open, let's open it. Otherwise let's close it.
     if (this.props.openInfoWindow === this)
