@@ -1,6 +1,8 @@
 import React from 'react';
 import Map from './Map.js';
 import Marker from './Marker.js';
+import Sidebar from './Sidebar.js';
+import Item from './Item.js';
 import './App.css';
 
 class App extends React.Component {
@@ -25,10 +27,21 @@ class App extends React.Component {
       );
     });
 
+    const items = this.markers.map((marker) => {
+      return (
+        <Item title={ marker.title } />
+      )
+    });
+
     return (
-      <Map center={{ lat: 51.5080883, lng: -0.1291377 }} zoom={ 14 }>
-        { markers }
-      </Map>
+      <div id="app">
+        <Sidebar>
+          { items }
+        </Sidebar>
+        <Map center={{ lat: 51.5080883, lng: -0.1291377 }} zoom={ 14 }>
+          { markers }
+        </Map>
+      </div>
     );
   }
 }
