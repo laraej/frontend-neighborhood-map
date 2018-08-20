@@ -31,10 +31,14 @@ class Marker extends React.Component {
   }
   render() {
     // If this marker's info window should be open, let's open it. Otherwise let's close it.
-    if (this.props.selectedPlace && this.props.selectedPlace.title === this.props.place.title)
+    if (this.props.selectedPlace && this.props.selectedPlace.title === this.props.place.title) {
+      this.marker.setAnimation(window.google.maps.Animation.BOUNCE);
       this.infoWindow.open(window.map, this.marker);
-    else
+    }
+    else {
+      this.marker.setAnimation(null);
       this.infoWindow.close();
+    }
 
     // The marker itself is handled by Google Maps.
     return null;
