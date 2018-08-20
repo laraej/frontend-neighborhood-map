@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class Marker extends React.Component {
   constructor(props) {
@@ -10,8 +11,11 @@ class Marker extends React.Component {
     });
 
     this.infoWindow = new window.google.maps.InfoWindow({
-      content: '<strong>' + this.props.place.title + '</strong>',
+      content: '<strong>' + this.props.place.title + '</strong><br><br>' +
+          '<em>Loading information...</em>'
     });
+
+    this.loadInfo();
 
     this.marker.addListener('click', () => {
       this.props.onSelect(this.props.place);
@@ -20,6 +24,28 @@ class Marker extends React.Component {
     this.infoWindow.addListener('closeclick', () => {
       this.props.onSelect(null);
     });
+  }
+  loadInfo() {
+    $.getJSON('https://api.foursquare.com/v2/venues/' + this.props.place.foursquare
+        + '?v=20180323&client_id=1INTJ2JHYE4RWH2NUAT4RPUFMI1AV1TIP453EZLBV3OGD2YY&'
+        + 'client_secret=3UX1DUYOBC0JCFYJXXSVRLKN5G2KT4AKMLHSSFORCSETRFVX',
+      (data) => {
+        const venue = data.response.venue;
+
+        const address = venue.location.address + '<br>' + venue.location.postalCode + '<br><br>';
+
+        var hours = '';
+
+        for (const timeframe of venue.hours.timeframes) {
+          hours += timeframe.days + '<br>'
+          for (const open of timeframe.open)
+            hours += open.renderedTime + '<br>';
+          hours += '<br>';
+        }
+
+        this.infoWindow.setContent('<strong>' + this.props.place.title + '</strong><br><br>' +
+            address + hours + '<small>Information by Foursquare</small>');
+      });
   }
   componentWillMount() {
     // Make the marker visible.

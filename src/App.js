@@ -13,14 +13,14 @@ class App extends React.Component {
     this.onSelect = this.onSelect.bind(this);
 
     this.places = [
-      { title: "The National Gallery", position: { lat: 51.508929, lng: -0.128299 } },
-      { title: "Tate Modern", position: { lat: 51.5075939, lng: -0.0993544 } },
-      { title: "British Museum", position: { lat: 51.5194133, lng: -0.1269566 } },
-      { title: "Victoria and Albert Museum", position: { lat: 51.4966392, lng: -0.17218 } },
-      { title: "Imperial War Museum", position: { lat: 51.4958308, lng: -0.1086615 } },
-      { title: "Science Museum", position: { lat: 51.4978095, lng: -0.1745235 } },
-      { title: "Natural History Museum", position: { lat: 51.496715, lng: -0.1763672 } },
-      { title: "British Library", position: { lat: 51.5299717, lng: -0.1276759 } }
+      { title: "The National Gallery", position: { lat: 51.508929, lng: -0.128299 }, foursquare: '4ac518cdf964a520e6a520e3' },
+      { title: "Tate Modern", position: { lat: 51.5075939, lng: -0.0993544 }, foursquare: '4ac518d3f964a52076a720e3' },
+      { title: "British Museum", position: { lat: 51.5194133, lng: -0.1269566 }, foursquare: '4ac518d2f964a5203da720e3' },
+      { title: "Victoria and Albert Museum", position: { lat: 51.4966392, lng: -0.17218 }, foursquare: '4ae2d9f8f964a5208d8f21e3' },
+      { title: "Imperial War Museum", position: { lat: 51.4958308, lng: -0.1086615 }, foursquare: '4ac518d3f964a52078a720e3' },
+      { title: "Science Museum", position: { lat: 51.4978095, lng: -0.1745235 }, foursquare: '4ac518cdf964a520e9a520e3' },
+      { title: "Natural History Museum", position: { lat: 51.496715, lng: -0.1763672 }, foursquare: '4ac518cdf964a520e8a520e3' },
+      { title: "British Library", position: { lat: 51.5299717, lng: -0.1276759 }, foursquare: '4ac518cef964a52019a620e3' }
     ];
 
     this.state = {
