@@ -11,7 +11,7 @@ class App extends React.Component {
 
     this.onFilter = this.onFilter.bind(this);
 
-    this.markers = [
+    this.places = [
       { title: "The National Gallery", position: { lat: 51.508929, lng: -0.128299 } },
       { title: "Tate Modern", position: { lat: 51.5075939, lng: -0.0993544 } },
       { title: "British Museum", position: { lat: 51.5194133, lng: -0.1269566 } },
@@ -23,33 +23,33 @@ class App extends React.Component {
     ];
 
     this.state = {
-      markers: this.markers
+      places: this.places
     }
   }
   onFilter(text) {
     if (text.length === 0) {
       this.setState((prevState, props) => {
-        return {markers: this.markers}
+        return {places: this.places}
       });
     }
     else {
-      const markers = this.markers.filter((marker) => marker.title.toLowerCase().indexOf(text.toLowerCase()) >= 0);
+      const places = this.places.filter((place) => place.title.toLowerCase().indexOf(text.toLowerCase()) >= 0);
 
       this.setState((prevState, props) => {
-        return {markers: markers}
+        return {places: places}
       });
     }
   }
   render() {
-    const markers = this.state.markers.map((marker) => {
+    const markers = this.state.places.map((place) => {
       return (
-        <Marker title={ marker.title } position={ marker.position } key={ marker.title } />
+        <Marker place={ place } key={ place.title } />
       );
     });
 
-    const items = this.state.markers.map((marker) => {
+    const items = this.state.places.map((place) => {
       return (
-        <Item title={ marker.title } key={ marker.title } />
+        <Item place={ place } key={ place.title } />
       )
     });
 

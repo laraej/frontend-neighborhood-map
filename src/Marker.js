@@ -5,12 +5,12 @@ class Marker extends React.Component {
     super(props);
 
     this.marker = new window.google.maps.Marker({
-      position: this.props.position,
-      title: this.props.title
+      position: this.props.place.position,
+      title: this.props.place.title
     });
 
     this.infoWindow = new window.google.maps.InfoWindow({
-      content: '<strong>' + this.props.title + '</strong>',
+      content: '<strong>' + this.props.place.title + '</strong>',
     });
 
     this.marker.addListener('click', () => {

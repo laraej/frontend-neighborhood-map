@@ -3,7 +3,7 @@ import React from 'react';
 class Item extends React.Component {
   render() {
     return (
-      <li>{ this.props.title }</li>
+      <li>{ this.props.place.title }</li>
     )
   }
 }
