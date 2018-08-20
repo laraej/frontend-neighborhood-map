@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
 
     this.onFilter = this.onFilter.bind(this);
+    this.onSelect = this.onSelect.bind(this);
 
     this.places = [
       { title: "The National Gallery", position: { lat: 51.508929, lng: -0.128299 } },
@@ -23,7 +24,10 @@ class App extends React.Component {
     ];
 
     this.state = {
-      places: this.places
+      places: this.places,
+      // The marker with currently open info window or null meaning that
+      // no marker has currently an open info window.
+      selectedPlace: null
     }
   }
   onFilter(text) {
@@ -40,16 +44,23 @@ class App extends React.Component {
       });
     }
   }
+  onSelect(place) {
+    this.setState((prevState, props) => {
+      return { selectedPlace: place };
+    });
+  }
   render() {
     const markers = this.state.places.map((place) => {
       return (
-        <Marker place={ place } key={ place.title } />
+        <Marker place={ place } key={ place.title } selectedPlace={ this.state.selectedPlace }
+            onSelect={ this.onSelect } />
       );
     });
 
     const items = this.state.places.map((place) => {
       return (
-        <Item place={ place } key={ place.title } />
+        <Item place={ place } key={ place.title } selectedPlace={ this.state.selectedPlace }
+            onSelect={ this.onSelect} />
       )
     });
 

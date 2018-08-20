@@ -14,11 +14,11 @@ class Marker extends React.Component {
     });
 
     this.marker.addListener('click', () => {
-      this.props.onOpenInfoWindow(this);
+      this.props.onSelect(this.props.place);
     });
 
     this.infoWindow.addListener('closeclick', () => {
-      this.props.onOpenInfoWindow(null);
+      this.props.onSelect(null);
     });
   }
   componentWillMount() {
@@ -31,7 +31,7 @@ class Marker extends React.Component {
   }
   render() {
     // If this marker's info window should be open, let's open it. Otherwise let's close it.
-    if (this.props.openInfoWindow === this)
+    if (this.props.selectedPlace && this.props.selectedPlace.title === this.props.place.title)
       this.infoWindow.open(window.map, this.marker);
     else
       this.infoWindow.close();

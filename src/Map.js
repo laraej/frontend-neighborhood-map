@@ -7,13 +7,8 @@ class Map extends React.Component {
     window.mapComponent = this;
 
     this.state = {
-      initialized: false,
-      // The marker with currently open info window or null meaning that
-      // no marker has currently an open info window.
-      openInfoWindow: null
+      initialized: false
     }
-
-    this.onOpenInfoWindow = this.onOpenInfoWindow.bind(this);
   }
   onInit() {
     window.map = new window.google.maps.Map(document.getElementById("map"), {
@@ -29,25 +24,13 @@ class Map extends React.Component {
       return { initialized: true }
     });
   }
-  onOpenInfoWindow(marker) {
-    this.setState((prevState, props) => {
-      return { openInfoWindow: marker };
-    });
-  }
   componentDidMount() {
     loadGoogleMaps();
   }
   render() {
-    const markers = this.props.children.map((marker) => {
-      return React.cloneElement(marker, {
-        openInfoWindow: this.state.openInfoWindow,
-        onOpenInfoWindow: this.onOpenInfoWindow
-      });
-    });
-
     return (
       <div id="map">
-      { this.state.initialized ? markers : null }
+      { this.state.initialized ? this.props.children : null }
       </div>
     );
   }
