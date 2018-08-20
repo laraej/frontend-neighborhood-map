@@ -10,8 +10,10 @@ class Item extends React.Component {
     this.props.onSelect(this.props.place);
   }
   render() {
+    const selected = this.props.selectedPlace && this.props.selectedPlace.title === this.props.place.title;
+
     return (
-      <li onClick={ this.onClick }>{ this.props.place.title }</li>
+      <li className={ selected ? 'selected' : '' }onClick={ this.onClick }>{ this.props.place.title }</li>
     )
   }
 }
