@@ -14,10 +14,46 @@ html, body {
   height: 100%;
 }
 
-#sidebar {
-  background: #ffffff;
+.sidenav-open {
+  background: #efefef;
   border-right: 1px solid #e6e6e6;
-  width: 300px;
+  width: 320px;
+  padding-left: 30px;
+}
+
+.sidenav-closed {
+  background: #efefef;
+  height: 100%;
+}
+
+.menu-bars {
+  font-size: 1.7em;
+  float: right;
+  margin: 20px;
+}
+
+.app-title {
+  color: #424242;
+  clear: both;
+}
+
+.filter-title {
+  padding: 15px 5px 0px 0px;
+}
+
+.filter {
+ width: 80%;
+ padding: 10px 5px 10px 5px;
+}
+
+.museum-list {
+  list-style-type: none;
+  margin-top: 30px;
+  padding-left: 0;
+}
+
+.museum-list li {
+  margin: .8em 0;
 }
 
 #map {
