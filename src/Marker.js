@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 
 class Marker extends React.Component {
   constructor(props) {
@@ -25,27 +24,47 @@ class Marker extends React.Component {
       this.props.onSelect(null);
     });
   }
+  setContent(response) {
+    response.json().then((data) => {
+      const venue = data.response.venue;
+      if (!venue)
+        return;
+
+      const address = venue.location.address + '<br>' + venue.location.postalCode + '<br><br>';
+
+      var hours = '';
+
+      for (const timeframe of venue.hours.timeframes) {
+        hours += timeframe.days + '<br>'
+        for (const open of timeframe.open)
+          hours += open.renderedTime + '<br>';
+        hours += '<br>';
+      }
+
+      this.infoWindow.setContent('<strong>' + this.props.place.title + '</strong><br><br>' +
+          address + hours + '<small>Information by Foursquare</small>');
+    });
+  }
   loadInfo() {
-    $.getJSON('https://api.foursquare.com/v2/venues/' + this.props.place.foursquare
-        + '?v=20180323&client_id=1INTJ2JHYE4RWH2NUAT4RPUFMI1AV1TIP453EZLBV3OGD2YY&'
-        + 'client_secret=3UX1DUYOBC0JCFYJXXSVRLKN5G2KT4AKMLHSSFORCSETRFVX',
-      (data) => {
-        const venue = data.response.venue;
+    const request = 'https://api.foursquare.com/v2/venues/' + this.props.place.foursquare
+          + '?v=20180323&client_id=1INTJ2JHYE4RWH2NUAT4RPUFMI1AV1TIP453EZLBV3OGD2YY&'
+          + 'client_secret=3UX1DUYOBC0JCFYJXXSVRLKN5G2KT4AKMLHSSFORCSETRFVX';
 
-        const address = venue.location.address + '<br>' + venue.location.postalCode + '<br><br>';
+    window.caches.open('frontend-neighborhood-map').then((cache) => {
+      fetch(request).then((response) => {
+        this.setContent(response.clone());
 
-        var hours = '';
+        // Only cache the response if it was not an error.
+        if (response.ok)
+          cache.put(request, response.clone());
+      }).catch(() => {
 
-        for (const timeframe of venue.hours.timeframes) {
-          hours += timeframe.days + '<br>'
-          for (const open of timeframe.open)
-            hours += open.renderedTime + '<br>';
-          hours += '<br>';
-        }
-
-        this.infoWindow.setContent('<strong>' + this.props.place.title + '</strong><br><br>' +
-            address + hours + '<small>Information by Foursquare</small>');
+        // We are offline.
+        cache.match(request).then((response) => {
+          this.setContent(response);
+        });
       });
+    });
   }
   componentWillMount() {
     // Make the marker visible.
