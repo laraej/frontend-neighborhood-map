@@ -10,37 +10,31 @@ The list view and the markers update accordingly in real time. Selecting a locat
 
 In case of error (e.g. in a situation where a third party API does not return the expected result) a message is displayed notifying the user that the data can't be loaded.
 
-## Install
+## Prerequisites
+You need to have installed node.js server to run the app.
+https://nodejs.org/en/download/
 
-1. First clone this repository on Github:
-  * Under the repository name, click Clone or download.
-  * In the Clone with HTTPs section, click to copy the clone URL for the repository.
+## Install and run
 
-2. On terminal go to directory where you want to have the clone and run:
-  git clone [the clone URL]
+1. First step is to clone this repository. On terminal go to directory where you want to have the clone and run:
+`git clone https://github.com/laraej/frontend-neighborhood-map.git`
 
-3. Install the app on terminal with 'npm install'.
+2. Install the app on terminal:
+`npm install`
 
-## Run
+3. Run the app on terminal:
+`npm start` 
 
-Run the app on termial with 'npm start'. 
-
-To stop running press Ctrl-C on the terminal.
-
-## Demo
-
-You can view the app here:
+(To stop running press Ctrl-C on the terminal.)
 
 ## Technical specification
 
-### APIs used
-
-#### External APIs
+### External APIs used
 
 * Google Maps API
 * Foursquare Places API
 
-#### Browser APIs
+### Browser APIs used
 
 * Fetch API
 * Service Worker Cache API
@@ -48,10 +42,10 @@ You can view the app here:
 ### React components
 
 * App
-* Sidebar
-* Item (in Sidebar)
-* Map
-* Marker
+    * Sidebar
+        * Item 
+    * Map
+        * Marker
 
 ## Support
 

@@ -86,9 +86,6 @@ html, body {
  *
  */
 .error-handling {
-  /*position: absolute;*/
-  /*z-index: 9999 !important;/*
-  /*top: 0;*/
   position: fixed;
   z-index: 1;
   width: 100%;
@@ -170,5 +167,3 @@ html, body {
     font-size: 12px;
   }
 }
-
-
