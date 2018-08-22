@@ -17,12 +17,15 @@ https://nodejs.org/en/download/
 ## Install and run
 
 1. First step is to clone this repository. On terminal go to directory where you want to have the clone and run:
+
 `git clone https://github.com/laraej/frontend-neighborhood-map.git`
 
 2. Install the app on terminal:
+
 `npm install`
 
 3. Run the app on terminal:
+
 `npm start` 
 
 (To stop running press Ctrl-C on the terminal.)
