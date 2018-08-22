@@ -66,8 +66,7 @@ class App extends React.Component {
 
     const items = this.state.places.map((place) => {
       return (
-        <Item place={ place } key={ place.title } selectedPlace={ this.state.selectedPlace }
-            onSelect={ this.onSelect} />
+        <Item place={ place } key={ place.title } selectedPlace={ this.state.selectedPlace } />
       )
     });
 
@@ -78,7 +77,7 @@ class App extends React.Component {
     return (
       <div id="app">
         <div className="error-handling" role="alert" style={ errorHandlingStyle }>There is a problem with loading this page.</div>
-        <Sidebar onFilter={ this.onFilter }>
+        <Sidebar onFilter={ this.onFilter } onSelect={ this.onSelect }>
           { items }
         </Sidebar>
         <Map center={{ lat: 51.5080883, lng: -0.1291377 }} zoom={ 14 } onError={ this.onError }>

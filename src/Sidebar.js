@@ -4,6 +4,7 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onSelect = this.onSelect.bind(this);
     this.onFilter = this.onFilter.bind(this);
     this.onHamburger = this.onHamburger.bind(this);
 
@@ -14,12 +15,22 @@ class Sidebar extends React.Component {
   onHamburger(event) {
     this.setState((prevState, props) => {
       return {sidebarOpen: !this.state.sidebarOpen};
-    })
+    });
+  }
+  onSelect(event) {
+    this.setState((prevState, props) => {
+      return {sidebarOpen: false}
+    });
+
+    this.props.onSelect(event);
   }
   onFilter(event) {
     this.props.onFilter(event.target.value);
   }
   render() {
+    const items = this.props.children.map((item) => {
+      return React.cloneElement(item, { onSelect: this.onSelect });
+    });
 
     if (this.state.sidebarOpen) {
       return (
@@ -29,7 +40,7 @@ class Sidebar extends React.Component {
           <h3 className="filter-title">Filter museums by name</h3>
           <input className="filter" type="text" placeholder="Museum name ..." onChange={ this.onFilter } tabIndex={ 0 }></input>
           <ul className="museum-list">
-            { this.props.children }
+            { items }
           </ul>
         </nav>
       )
