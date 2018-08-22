@@ -13,7 +13,7 @@ class Item extends React.Component {
     const selected = this.props.selectedPlace && this.props.selectedPlace.title === this.props.place.title;
 
     return (
-      <li className={ selected ? 'selected' : '' }onClick={ this.onClick } tabindex={ 0 }>{ this.props.place.title }</li>
+      <li className={ selected ? 'selected' : '' } onClick={ this.onClick } tabIndex={ 0 }>{ this.props.place.title }</li>
     )
   }
 }

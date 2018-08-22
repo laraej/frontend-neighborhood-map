@@ -52,16 +52,21 @@ class Marker extends React.Component {
 
     window.caches.open('frontend-neighborhood-map').then((cache) => {
       fetch(request).then((response) => {
-        this.setContent(response.clone());
+        if (response.ok) {
+          this.setContent(response.clone());
 
-        // Only cache the response if it was not an error.
-        if (response.ok)
           cache.put(request, response.clone());
+        }
+        else {
+          this.props.onError();
+        }
       }).catch(() => {
 
         // We are offline.
         cache.match(request).then((response) => {
           this.setContent(response);
+        }).catch(() => {
+          this.props.onError();
         });
       });
     });

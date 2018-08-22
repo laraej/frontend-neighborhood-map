@@ -9,6 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onError = this.onError.bind(this);
     this.onFilter = this.onFilter.bind(this);
     this.onSelect = this.onSelect.bind(this);
 
@@ -27,8 +28,14 @@ class App extends React.Component {
       places: this.places,
       // The marker with currently open info window or null meaning that
       // no marker has currently an open info window.
-      selectedPlace: null
+      selectedPlace: null,
+      error: false
     }
+  }
+  onError() {
+    this.setState((prevState, props) => {
+      return {error: true};
+    });
   }
   onFilter(text) {
     if (text.length === 0) {
@@ -53,7 +60,7 @@ class App extends React.Component {
     const markers = this.state.places.map((place) => {
       return (
         <Marker place={ place } key={ place.title } selectedPlace={ this.state.selectedPlace }
-            onSelect={ this.onSelect } />
+            onSelect={ this.onSelect } onError={ this.onError } />
       );
     });
 
@@ -64,13 +71,17 @@ class App extends React.Component {
       )
     });
 
+    const errorHandlingStyle = {
+      display: this.state.error ? 'block' : 'none',
+    }
+
     return (
       <div id="app">
-        <div className="error-handling" role="alert">There seems to a problem with loading this page.</div>
+        <div className="error-handling" role="alert" style={ errorHandlingStyle }>There is a problem with loading this page.</div>
         <Sidebar onFilter={ this.onFilter }>
           { items }
         </Sidebar>
-        <Map center={{ lat: 51.5080883, lng: -0.1291377 }} zoom={ 14 }>
+        <Map center={{ lat: 51.5080883, lng: -0.1291377 }} zoom={ 14 } onError={ this.onError }>
           { markers }
         </Map>
       </div>

@@ -25,7 +25,9 @@ class Map extends React.Component {
     });
   }
   componentDidMount() {
-    loadGoogleMaps();
+    window.gm_authFailure = this.props.onError;
+
+    loadGoogleMaps(this.props.onError);
   }
   render() {
     return (
@@ -36,12 +38,13 @@ class Map extends React.Component {
   }
 }
 
-function loadGoogleMaps() {
+function loadGoogleMaps(onError) {
   const script = document.createElement('script');
 
   script.type = 'text/javascript';
   script.async = true;
   script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBoGVwCc72EFuPldJgE_oTS-Udtv0xxjTQ&callback=initGoogleMaps';
+  script.onerror = onError;
 
   document.body.appendChild(script);
 }
