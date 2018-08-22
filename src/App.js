@@ -66,6 +66,7 @@ class App extends React.Component {
 
     return (
       <div id="app">
+        <div className="error-handling" role="alert">There seems to a problem with loading this page.</div>
         <Sidebar onFilter={ this.onFilter }>
           { items }
         </Sidebar>

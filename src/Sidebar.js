@@ -23,22 +23,22 @@ class Sidebar extends React.Component {
 
     if (this.state.sidebarOpen) {
       return (
-        <div id="sidebar" className="sidenav-open">
+        <nav id="sidebar" className="sidenav-open">
           <span className="menu-bars"><i className="fas fa-bars" onClick={ this.onHamburger } aria-hidden="true"></i></span>
           <h2 className="app-title">London Museums Map</h2>
           <h3 className="filter-title">Filter museums by name</h3>
-          <input className="filter" type="text" placeholder="Museum name ..." onChange={ this.onFilter }></input>
+          <input className="filter" type="text" placeholder="Museum name ..." onChange={ this.onFilter } tabindex={ 0 }></input>
           <ul className="museum-list">
             { this.props.children }
           </ul>
-        </div>
+        </nav>
       )
     }
     else {
       return (
-        <div className="sidenav-closed">
+        <nav className="sidenav-closed">
           <span className="menu-bars"><i className="fas fa-bars" onClick={ this.onHamburger } aria-hidden="true"></i></span>
-        </div>
+        </nav>
       )
     }
   }
